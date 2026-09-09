@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ePro | الجوائز والتحديات</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Cairo',sans-serif;
+    background:#05071c;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* خلفية */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+    radial-gradient(circle at 10% 10%,rgba(255,215,0,.14),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(70,60,255,.16),transparent 30%),
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:auto,auto,45px 45px,45px 45px;
+}
+
+/* الحاوية */
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* الناف بار */
+header{
+    position:relative;
+    z-index:10;
+    padding:20px 0;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:white;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:900;
+}
+
+.logo img{
+    width:52px;
+    height:52px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 0 30px rgba(255,210,0,.25);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    color:#aeb4d1;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#ffd400;
+}
+
+/* الأزرار */
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 22px;
+    border-radius:15px;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s;
+}
+
+.btn-yellow{
+    color:#111;
+    background:linear-gradient(135deg,#ffe600,#ffb700);
+    box-shadow:0 12px 35px rgba(255,190,0,.2);
+}
+
+.btn-yellow:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(255,190,0,.35);
+}
+
+.btn-dark{
+    color:white;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.btn-dark:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.1);
+}
+
+/* Hero */
+.hero{
+    min-height:720px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 15px;
+    border-radius:50px;
+    color:#ffe36a;
+    background:rgba(255,210,0,.08);
+    border:1px solid rgba(255,210,0,.2);
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.badge span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#ffd400;
+    box-shadow:0 0 15px #ffd400;
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,78px);
+    line-height:1.05;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#ffd400;
+    text-shadow:0 0 35px rgba(255,210,0,.3);
+}
+
+.hero-description{
+    color:#aeb4d0;
+    font-size:17px;
+    line-height:2;
+    max-width:620px;
+    margin-top:22px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.stats{
+    display:flex;
+    gap:35px;
+    margin-top:35px;
+}
+
+.stat strong{
+    display:block;
+    font-size:22px;
+}
+
+.stat small{
+    color:#777e9e;
+}
+
+/* الهاتف */
+.phone-area{
+    position:relative;
+    height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.glow{
+    position:absolute;
+    width:410px;
+    height:410px;
+    border-radius:50%;
+    background:radial-gradient(circle,#ffe000,rgba(255,190,0,.25),transparent 70%);
+    filter:blur(8px);
+    opacity:.65;
+}
+
+.phone{
+    position:relative;
+    z-index:2;
+    width:290px;
+    height:560px;
+    padding:9px;
+    border:8px solid #171b3c;
+    border-radius:45px;
+    background:#080b24;
+    transform:rotate(-5deg);
+    box-shadow:
+        0 40px 90px rgba(0,0,0,.6),
+        0 0 60px rgba(255,210,0,.13);
+}
+
+.phone::after{
+    content:"";
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:100px;
+    height:23px;
+    border-radius:20px;
+    background:#050719;
+}
+
+.phone-screen{
+    width:100%;
+    height:100%;
+    border-radius:34px;
+    overflow:hidden;
+    padding:35px 16px 15px;
+    background:
+        radial-gradient(circle at 50% 20%,rgba(255,215,0,.15),transparent 25%),
+        linear-gradient(160deg,#121844,#05071b);
+}
+
+.time{
+    display:flex;
+    justify-content:space-between;
+    color:#8c93b5;
+    font-size:10px;
+}
+
+.app-image{
+    display:block;
+    width:120px;
+    height:120px;
+    margin:28px auto 15px;
+    border-radius:30px;
+    object-fit:cover;
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+.phone-screen h3{
+    text-align:center;
+    font-size:22px;
+}
+
+.phone-screen p{
+    text-align:center;
+    color:#858cad;
+    font-size:11px;
+}
+
+.phone-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:25px;
+}
+
+.phone-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:15px;
+    padding:13px;
+    font-size:11px;
+}
+
+.phone-card b{
+    display:block;
+    color:#ffd400;
+    font-size:19px;
+    margin-bottom:5px;
+}
+
+/* العناصر العائمة */
+.float{
+    position:absolute;
+    z-index:5;
+    padding:13px 17px;
+    background:rgba(12,16,43,.85);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    backdrop-filter:blur(15px);
+    font-size:12px;
+    box-shadow:0 20px 45px rgba(0,0,0,.3);
+    animation:float 3s ease-in-out infinite;
+}
+
+.float.one{
+    top:80px;
+    right:0;
+}
+
+.float.two{
+    bottom:80px;
+    left:0;
+    animation-delay:1s;
+}
+
+.float.three{
+    top:250px;
+    left:-30px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+/* الأقسام */
+section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    font-size:38px;
+}
+
+.section-title p{
+    color:#858ca9;
+    margin-top:8px;
+}
+
+/* الكروت */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    padding:28px;
+    min-height:210px;
+    border-radius:25px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.025)
+    );
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,215,0,.3);
+    box-shadow:0 25px 60px rgba(0,0,0,.3);
+}
+
+.card-icon{
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:17px;
+    background:rgba(255,210,0,.1);
+    font-size:27px;
+    margin-bottom:17px;
+}
+
+.card h3{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#858ca9;
+    font-size:13px;
+    line-height:1.9;
+}
+
+/* التحميل */
+.download-box{
+    padding:60px;
+    border-radius:35px;
+    border:1px solid rgba(255,255,255,.1);
+    background:
+        radial-gradient(circle at 10% 50%,rgba(255,210,0,.15),transparent 35%),
+        linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.download-box h2{
+    font-size:38px;
+}
+
+.download-box p{
+    color:#979db7;
+    margin-top:8px;
+    line-height:2;
+}
+
+.apk-name{
+    color:#ffd400;
+    font-size:13px;
+    margin-top:12px;
+}
+
+/* Footer */
+footer{
+    padding:35px 0 50px;
+    text-align:center;
+    color:#666d8e;
+    font-size:12px;
+}
+
+/* موبايل */
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding-top:50px;
+    }
+
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons,
+    .stats{
+        justify-content:center;
+    }
+
+    .phone-area{
+        height:560px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .download-box{
+        flex-direction:column;
+        text-align:center;
+        padding:40px 25px;
+    }
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .phone-area{
+        transform:scale(.78);
+        height:480px;
+        margin-top:-20px;
+    }
+
+    .float.one{
+        right:-5px;
+    }
+
+    .float.three{
+        left:-10px;
+    }
+
+    .download-box h2{
+        font-size:29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+<div class="container">
+
+<nav>
+
+<a href="#" class="logo">
+<img src="logo.png" alt="ePro">
+<span>ePro</span>
+</a>
+
+<div class="nav-links">
+<a href="#features">المميزات</a>
+<a href="#rewards">الجوائز</a>
+<a href="#download">تحميل التطبيق</a>
+</div>
+
+<a href="ePro.apk" download class="btn btn-yellow">
+⬇ تحميل APK
+</a>
+
+</nav>
+
+</div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero container">
+
+<div>
+
+<div class="badge">
+<span></span>
+تطبيق ePro الرسمي
+</div>
+
+<h1>
+عالم الجوائز<br>
+<span>بين يديك.</span>
+</h1>
+
+<p class="hero-description">
+اكتشف عالم ePro، تابع أخبار الجوائز والمسابقات،
+اجمع الكوينز وشارك في التحديات واربح جوائز مميزة
+مثل التلفونات والآيبادات والسكوترات وحسابات بيس والشدات.
+</p>
+
+<div class="hero-buttons">
+
+<a href="ePro.apk" download class="btn btn-yellow">
+⬇ تنزيل تطبيق ePro
+</a>
+
+<a href="#features" class="btn btn-dark">
+اكتشف المميزات
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<strong>🏆</strong>
+<small>جوائز</small>
+</div>
+
+<div class="stat">
+<strong>🪙</strong>
+<small>كوينز</small>
+</div>
+
+<div class="stat">
+<strong>🎮</strong>
+<small>تحديات</small>
+</div>
+
+<div class="stat">
+<strong>🎁</strong>
+<small>مفاجآت</small>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHONE -->
+<div class="phone-area">
+
+<div class="glow"></div>
+
+<div class="float one">
+🏆 جوائز حصرية
+</div>
+
+<div class="float two">
+🪙 اجمع الكوينز
+</div>
+
+<div class="float three">
+🎮 العب ضد مشاهير
+</div>
+
+<div class="phone">
+
+<div class="phone-screen">
+
+<div class="time">
+<span>9:41</span>
+<span>● ● ●</span>
+</div>
+
+<img
+src="logo.png"
+class="app-image"
+alt="ePro Application"
+>
+
+<h3>ePro</h3>
+
+<p>
+جوائز • أخبار • تحديات
+</p>
+
+<div class="phone-grid">
+
+<div class="phone-card">
+<b>🏆</b>
+الجوائز
+</div>
+
+<div class="phone-card">
+<b>🪙</b>
+الكوينز
+</div>
+
+<div class="phone-card">
+<b>🎮</b>
+التحديات
+</div>
+
+<div class="phone-card">
+<b>📰</b>
+الأخبار
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section id="features">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+كل شيء في مكان واحد
+</h2>
+
+<p>
+مميزات ePro مصممة لتقدم لك تجربة ترفيهية مليئة بالجوائز.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="card-icon">
+🏆
+</div>
+
+<h3>
+جوائز ومفاجآت
+</h3>
+
+<p>
+شارك بالمسابقات والفعاليات واكتشف الجوائز المتنوعة والمفاجآت الجديدة.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🪙
+</div>
+
+<h3>
+كوينز
+</h3>
+
+<p>
+اجمع الكوينز واستفد منها داخل فعاليات وتجارب التطبيق.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🎮
+</div>
+
+<h3>
+اللعب ضد المشاهير
+</h3>
+
+<p>
+شارك في تحديات وفعاليات لعب مميزة ضد مشاهير وصناع محتوى.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+📱
+</div>
+
+<h3>
+تلفونات وآيبادات
+</h3>
+
+<p>
+فرص للفوز بأجهزة تقنية مميزة مثل الهواتف والآيبادات.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🛴
+</div>
+
+<h3>
+سكوترات
+</h3>
+
+<p>
+جوائز متنوعة لا تقتصر على الأجهزة، مع مسابقات ومفاجآت مستمرة.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+⚽
+</div>
+
+<h3>
+PES والشدات
+</h3>
+
+<p>
+حسابات بيس، شدات ومحتوى وجوائز خاصة بعشاق الألعاب.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REWARDS -->
+<section id="rewards">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+جوائز تنتظرك 🎁
+</h2>
+
+<p>
+تجربة مليئة بالتحديات والفرص والمفاجآت.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">📱</div>
+<h3>أجهزة ذكية</h3>
+<p>تلفونات وأجهزة إلكترونية ضمن الجوائز.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">💻</div>
+<h3>آيباد وأجهزة</h3>
+<p>جوائز تقنية مميزة لعشاق التكنولوجيا.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🛴</div>
+<h3>سكوترات</h3>
+<p>جوائز متنوعة ومفاجآت مختلفة.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DOWNLOAD -->
+<section id="download">
+
+<div class="container">
+
+<div class="download-box">
+
+<div>
+
+<h2>
+جاهز تبدأ؟ 🚀
+</h2>
+
+<p>
+حمّل تطبيق ePro الآن وابدأ رحلتك في عالم
+الجوائز والكوينز والتحديات.
+</p>
+
+<div class="apk-name">
+📦 ملف التطبيق: ePro.apk
+</div>
+
+</div>
+
+<a
+href="ePro.apk"
+download
+class="btn btn-yellow"
+>
+⬇ تنزيل التطبيق الآن
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 ePro — جميع الحقوق محفوظة
+
+</footer>
+
+</body>
+</html>
